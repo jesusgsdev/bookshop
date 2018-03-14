@@ -26,6 +26,7 @@
 		<junit.jupiter.version>5.1.0</junit.jupiter.version>
 		<junit.vintage.version>5.1.0</junit.vintage.version>
 		<junit.platform.version>1.1.0</junit.platform.version>
+		<docker.image.prefix>jesusgsdev</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -116,6 +117,19 @@
                     <check />
                 </configuration>
             </plugin>
+
+			<!-- Plugin to build the docker image -->
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<configuration>
+					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+			</plugin>
 
             <plugin>
 				<groupId>org.springframework.boot</groupId>

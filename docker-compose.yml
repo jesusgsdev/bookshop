@@ -1,0 +1,15 @@
+version: '2.2'
+services:
+  bookshop:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: bookshop
+    ports:
+      - 8080
+    networks:
+      - network1
+    scale: 3
+
+networks:
+  network1:

@@ -16,3 +16,11 @@ and the user name is `sa` and the password is `password`.
 
 # Postman Collection
 I have provided a Postman collection with all the existing endpoints and examples of calls for each one of them.
+
+# Docker
+If you want to build an image for docker, just execute the command 
+`docker build -t dockerbookshop .` to build the image and then use
+`docker run -p 8080:8080 docker-bookshop` to run it within a docker container.
+
+In case you want to try to use docker-compose to see how you can boot three instances on differents
+ports but all of them working at the same time, run the command `docker-componse up`
