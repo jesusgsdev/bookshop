@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>bookshop</name>
-	<description>Bookshop project built in Spring Boot 2 and JUnit 5</description>
+	<description>Bookshop project built with Spring Boot 2 and JUnit 5</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
