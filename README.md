@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jesusgsdev/springboot2junit5.svg?branch=master)](https://travis-ci.org/jesusgsdev/springboot2junit5)
+[![Build Status](https://travis-ci.org/jesusgsdev/bookshop.svg?branch=master)](https://travis-ci.org/jesusgsdev/bookshop)
 
 # Bookshop project using Spring Boot 2 and jUnit 5
 In this demo project I will be using Spring Boot 2.0 and jUnit 5 in their latest releases.
