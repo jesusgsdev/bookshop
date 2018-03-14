@@ -6,8 +6,8 @@ In this demo project I will be using Spring Boot 2.0 and jUnit 5 in their latest
 
 ## Current stack
 
-- SpringBoot 2.0.0 M7
-- jUnit 5.0.2
+- SpringBoot 2.0.0 RELEASE
+- JUnit 5.1.0
 - H2 Database 1.4.196
 
 # Accessing to the H2 database
