@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/jesusgsdev/bookshop.svg?branch=master)](https://travis-ci.org/jesusgsdev/bookshop)
 [![codecov](https://codecov.io/gh/jesusgsdev/bookshop/branch/master/graph/badge.svg)](https://codecov.io/gh/jesusgsdev/bookshop)
+[![BCH compliance](https://bettercodehub.com/edge/badge/jesusgsdev/bookshop?branch=master)](https://bettercodehub.com/)
 
 # Bookshop project using Spring Boot 2 and JUnit 5
 In this demo project I will be using Spring Boot 2.0 and jUnit 5 in their latest releases.
