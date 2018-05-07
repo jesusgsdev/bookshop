@@ -1,46 +1,49 @@
 package com.jesusgsdev.services;
 
 import com.jesusgsdev.entities.Book;
-import com.jesusgsdev.repositories.BookRepository;
+import org.assertj.core.util.Lists;
 import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-class BookServiceTests {
+public class BookServiceTests {
 
-    @Autowired
+    @Mock
     private BookService bookService;
-
-    @Autowired
-    private BookRepository bookRepository;
 
     @BeforeEach
     public void setUp(){
-        bookRepository.deleteAll();
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     @DisplayName("Add a new book in the Bookshop")
     public void saveTest(){
+        //Given
         Book book = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider");
+        book.setId(1L);
+        given(bookService.save(any(Book.class))).willReturn(book);
+
+        //When
         Book savedBook = bookService.save(book);
 
+        //Then
         assertNotNull(savedBook);
+        assertEquals(new Long(1), book.getId());
     }
 
 
@@ -50,11 +53,8 @@ class BookServiceTests {
         //Given
         final String author = UUID.randomUUID().toString().substring(0,10);
         Book book1 = new Book("ISBN00001", "Book Name", 9.99, author, 200, "provider");
-        Book book2 = new Book("ISBN00002", "Book Name 2", 9.99, "Author Name 2", 200, "provider");
-        Book book3 = new Book("ISBN00003", "Book Name 3", 9.99, author, 200, "provider");
-        bookService.save(book1);
-        bookService.save(book2);
-        bookService.save(book3);
+        Book book2 = new Book("ISBN00003", "Book Name 3", 9.99, author, 200, "provider");
+        given(bookService.findBooksByAuthor(author)).willReturn(Lists.newArrayList(book1, book2));
 
         //When
         List<Book> booksByAuthor = bookService.findBooksByAuthor(author);
@@ -73,15 +73,34 @@ class BookServiceTests {
         //Given
         final String author = UUID.randomUUID().toString().substring(0,10);
         Book book1 = new Book("ISBN00001", "Book Name", 9.99, "Author Name", 200, "provider");
-        bookService.save(book1);
+        given(bookService.findBooksByAuthor(author)).willReturn(Lists.emptyList());
 
         //When
         List<Book> booksByAuthor = bookService.findBooksByAuthor(author);
 
         //Then
-        assertAll( "Books found",
+        assertAll( "Books not found",
                 () -> assertThat(booksByAuthor, IsEmptyCollection.empty())
         );
     }
+
+    @Test
+    @DisplayName("Find a book by ISBN")
+    public void findBooksByISBN(){
+        //Given
+        final String isbn = "ISBN00001";
+        Book book1 = new Book(isbn, "Book Name", 9.99, "Author Name", 200, "provider");
+        given(bookService.findBookByISBN(isbn)).willReturn(Optional.of(book1));
+
+        //When
+        Optional<Book> bookFound = bookService.findBookByISBN(isbn);
+
+        //Then
+        assertAll( "Book found",
+                () -> assertTrue(bookFound.isPresent()),
+                () -> assertEquals(bookFound.get().getIsbn(), isbn)
+        );
+    }
+
 
 }

@@ -8,7 +8,7 @@ services:
    environment:
      - SERVICE_PORTS=8080
    deploy:
-     replicas: 10
+     replicas: 4
      update_config:
        parallelism: 2
        delay: 10s
@@ -28,7 +28,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - 80:80
+      - "8080:80"
     networks:
       - app
     deploy:
