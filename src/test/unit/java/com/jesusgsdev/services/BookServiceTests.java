@@ -1,11 +1,13 @@
 package com.jesusgsdev.services;
 
 import com.jesusgsdev.entities.Book;
+import com.jesusgsdev.repositories.BookRepository;
 import org.assertj.core.util.Lists;
 import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -22,8 +24,11 @@ import static org.mockito.BDDMockito.given;
 
 public class BookServiceTests {
 
-    @Mock
+    @InjectMocks
     private BookService bookService;
+
+    @Mock
+    private BookRepository bookRepository;
 
     @BeforeEach
     public void setUp(){
@@ -36,7 +41,7 @@ public class BookServiceTests {
         //Given
         Book book = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider");
         book.setId(1L);
-        given(bookService.save(any(Book.class))).willReturn(book);
+        given(bookRepository.save(any(Book.class))).willReturn(book);
 
         //When
         Book savedBook = bookService.save(book);
@@ -54,7 +59,7 @@ public class BookServiceTests {
         final String author = UUID.randomUUID().toString().substring(0,10);
         Book book1 = new Book("ISBN00001", "Book Name", 9.99, author, 200, "provider");
         Book book2 = new Book("ISBN00003", "Book Name 3", 9.99, author, 200, "provider");
-        given(bookService.findBooksByAuthor(author)).willReturn(Lists.newArrayList(book1, book2));
+        given(bookRepository.findBookByAuthor(author)).willReturn(Lists.newArrayList(book1, book2));
 
         //When
         List<Book> booksByAuthor = bookService.findBooksByAuthor(author);
@@ -73,7 +78,7 @@ public class BookServiceTests {
         //Given
         final String author = UUID.randomUUID().toString().substring(0,10);
         Book book1 = new Book("ISBN00001", "Book Name", 9.99, "Author Name", 200, "provider");
-        given(bookService.findBooksByAuthor(author)).willReturn(Lists.emptyList());
+        given(bookRepository.findBookByAuthor(author)).willReturn(Lists.emptyList());
 
         //When
         List<Book> booksByAuthor = bookService.findBooksByAuthor(author);
@@ -90,7 +95,7 @@ public class BookServiceTests {
         //Given
         final String isbn = "ISBN00001";
         Book book1 = new Book(isbn, "Book Name", 9.99, "Author Name", 200, "provider");
-        given(bookService.findBookByISBN(isbn)).willReturn(Optional.of(book1));
+        given(bookRepository.findBookByIsbn(isbn)).willReturn(Optional.of(book1));
 
         //When
         Optional<Book> bookFound = bookService.findBookByISBN(isbn);
@@ -102,5 +107,22 @@ public class BookServiceTests {
         );
     }
 
+    @Test
+    @DisplayName("Find all books")
+    public void findAllBooks(){
+        //Given
+        Book book1 = new Book("ISBN00001", "Book Name", 9.99, "Author Name", 200, "provider");
+        Book book2 = new Book("ISBN00003", "Book Name 3", 9.99, "Author Name", 200, "provider");
+        given(bookRepository.findAll()).willReturn(Lists.newArrayList(book1, book2));
+
+        //When
+        List<Book> books = bookService.findAll();
+
+        //Then
+        assertAll( "It returns all books",
+                () -> assertThat(books, not(IsEmptyCollection.empty())),
+                () -> assertThat(books, hasSize(2))
+        );
+    }
 
 }

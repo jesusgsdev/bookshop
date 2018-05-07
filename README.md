@@ -27,6 +27,7 @@ To leave the Swarm and stop and delete all created containers run the command
 `docker swarm leave` or `docker swarm leave --force` in case the first doesn't work.
 
 ### Current stack
-- SpringBoot 2.0.0 RELEASE
-- JUnit 5.1.0
+- SpringBoot 2.0.1 RELEASE
+- JUnit 5.2.0
+- Mockito 2.18.3
 - H2 Database 1.4.196
