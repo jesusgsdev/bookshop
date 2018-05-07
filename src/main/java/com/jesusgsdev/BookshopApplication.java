@@ -7,10 +7,10 @@ import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @SpringBootApplication
-public class BookshophubApplication {
+public class BookshopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookshophubApplication.class, args);
+		SpringApplication.run(BookshopApplication.class, args);
 	}
 
 	@PostConstruct
