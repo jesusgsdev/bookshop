@@ -27,6 +27,7 @@
 		<junit.platform.version>1.1.0</junit.platform.version>
 		<mockito.core.version>2.18.3</mockito.core.version>
 		<apache.commons.lang.version>3.7</apache.commons.lang.version>
+		<maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
 		<docker.image.prefix>jesusgsdev</docker.image.prefix>
 	</properties>
 
@@ -145,13 +146,22 @@
 				</configuration>
 			</plugin>
 
+			<!-- Plugin for checkstyle -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven-checkstyle-plugin.version}</version>
+			</plugin>
+
+			<!-- Sunfire plugin for tests-->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version>
                 <configuration>
-                    <includes>
-                        <include>**/*Tests.java</include>
-                    </includes>
+                        <testSourceDirectory>src/test/unit/java</testSourceDirectory>
+                        <includes>
+                            <include>%regex[.*Tests.*]</include>
+                        </includes>
                 </configuration>
 				<dependencies>
 					<dependency>
@@ -168,6 +178,13 @@
 			</plugin>
 
 		</plugins>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/unit/resources</directory>
+            </testResource>
+        </testResources>
+
 	</build>
 
 </project>
