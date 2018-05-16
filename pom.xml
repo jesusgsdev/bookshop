@@ -179,11 +179,9 @@
 
 		</plugins>
 
-        <testResources>
-            <testResource>
-                <directory>src/test/unit/resources</directory>
-            </testResource>
-        </testResources>
+        <testSourceDirectory>
+            ${project.basedir}/src/test/unit/java
+        </testSourceDirectory>
 
 	</build>
 
