@@ -20,18 +20,19 @@ class BookServiceSpecification extends Specification {
 
         bookRepository = Mock()
         bookService = new BookService(bookRepository)
-
     }
 
     def "Book is correctly saved"(){
 
-        given :
+        given: "A Book with ISBN, Title, Price, Author, Pages and Provider"
             Book book = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider")
+        and: "Mocking the repository to return the book after performing a save"
             bookRepository.save(book) >> book
-        when:
+
+        when: "Service layer saves the book"
             bookService.save(book)
 
-        then:
+        then: "The method save(Book b) of BookRepository will be called once and the return object will be the book object"
             1 * bookRepository.save(book) >> book
     }
 
@@ -39,7 +40,7 @@ class BookServiceSpecification extends Specification {
         log.debug ("Cleanup method - Runs after every feature method.")
     }
     def cleanupSpec(){
-        log.debug ("cleanupSpec() - Runs only once per specification")
+        log.debug ("cleanupSpec() - Runs after the last feature method")
     }
 
 }
