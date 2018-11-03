@@ -4,8 +4,8 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/jesusgsdev/bookshop/badge.svg)](https://snyk.io/test/github/jesusgsdev/bookshop)
 
 
-# Bookshop project using Spring Boot 2 and JUnit 5
-In this demo project I will be using Spring Boot 2.0 and jUnit 5 in their latest releases.
+# Bookshop project using Spring Boot 2.1 and JUnit 5 compiling with Java 11
+In this demo project I will be using Spring Boot 2.1 and jUnit 5 in their latest releases.
 
 ## Accessing to the H2 database
 You can access to the database typing `http://localhost:8080/console` and using as JDBC URL this one: `jdbc:h2:mem:bookshop`
@@ -29,7 +29,7 @@ To leave the Swarm and stop and delete all created containers run the command
 `docker swarm leave` or `docker swarm leave --force` in case the first doesn't work.
 
 ### Current stack
-- SpringBoot 2.0.1 RELEASE
+- SpringBoot 2.1 RELEASE
 - JUnit 5.2.0
 - Mockito 2.18.3
 - H2 Database 1.4.196
