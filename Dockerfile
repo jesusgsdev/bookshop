@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:11-jdk-slim
 COPY ./target/bookshop-0.0.1-SNAPSHOT.jar /usr/src/bookshop/
 WORKDIR /usr/src/bookshop
 EXPOSE 8080
