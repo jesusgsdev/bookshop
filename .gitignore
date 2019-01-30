@@ -41,5 +41,4 @@ src/main/java/com/jesusgsdev/configuration/
 src/test/e2e/
 src/test/integration/
 .gradle
-/gradle
 .java-version
