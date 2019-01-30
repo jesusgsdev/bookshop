@@ -42,6 +42,4 @@ src/test/e2e/
 src/test/integration/
 .gradle
 /gradle
-gradlew
-gradlew*
 .java-version
