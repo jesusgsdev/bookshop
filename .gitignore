@@ -40,3 +40,8 @@ src/main/resources/templates/
 src/main/java/com/jesusgsdev/configuration/
 src/test/e2e/
 src/test/integration/
+.gradle
+/gradle
+gradlew
+gradlew*
+.java-version
