@@ -13,5 +13,7 @@ variables:
   imageName: 'jesusgsdev-bookshop-demo:$(build.buildId)'
 
 steps:
+- script: ./gradlew build
+  displayName: 'build project'
 - script: docker build -f Dockerfile -t $(imageName) .
   displayName: 'docker build'
