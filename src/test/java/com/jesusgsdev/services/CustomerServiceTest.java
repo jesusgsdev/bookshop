@@ -55,7 +55,7 @@ public class CustomerServiceTest {
         assertAll("Customer found",
                 () -> assertTrue(customerFound.isPresent()),
                 () -> assertEquals(((Customer)customerFound.get()).getEmail(), email)
-        );
+                );
     }
 
 
