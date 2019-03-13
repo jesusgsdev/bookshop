@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -49,7 +48,7 @@ public class PurchaseServiceTest {
 
         given(purchaseRepository.findPurchaseByCustomerEmail(email)).willReturn(Lists.newArrayList(purchase,purchase2,purchase3));
 
-        //when
+        //When
         List<Purchase> listPurchase = purchaseService.findPurchasesByCustomerEmail(email);
 
         //Then
@@ -69,8 +68,7 @@ public class PurchaseServiceTest {
         book1.setId(id);
 
         Customer customer = new Customer("pedro", "pajares", "avenida palmera45", "johndoe@mailinator.com");
-        Optional<PaymentMethod> paymentMethodOptional = PaymentMethod.fromValue("paypal");
-        PaymentMethod paymentMethod = paymentMethodOptional.get();
+        PaymentMethod paymentMethod = PaymentMethod.fromValue("paypal").get();
         Purchase purchase = new Purchase(customer,1.20,book1, paymentMethod,"Euros");
 
         given(purchaseRepository.findPurchaseByBookId(id.toString())).willReturn(Lists.newArrayList(purchase));
