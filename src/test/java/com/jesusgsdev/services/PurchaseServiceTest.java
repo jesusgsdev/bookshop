@@ -80,6 +80,6 @@ public class PurchaseServiceTest {
                 () -> assertThat(purchaseFound, not(IsEmptyCollection.empty())),
                 () -> assertThat(purchaseFound, hasSize(1)),
                 () -> assertTrue(purchaseFound.stream().allMatch(custom -> custom.getBook().getId().equals((id))))
-                        );
+                );
     }
 }
