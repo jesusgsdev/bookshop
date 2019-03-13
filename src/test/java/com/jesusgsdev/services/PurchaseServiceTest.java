@@ -31,7 +31,6 @@ public class PurchaseServiceTest {
         MockitoAnnotations.initMocks(this);
     }
 
-
     @Test
     @DisplayName("Add a new find of purchases for customers by email in the Bookshop")
     public void findPurchasesByCustomerEmailTest() {
@@ -57,8 +56,8 @@ public class PurchaseServiceTest {
                 () -> assertThat(listPurchase, hasSize(3)),
                 () -> assertTrue(listPurchase.stream().allMatch(custom -> purchase.getCustomer().getEmail().equals(custom.getCustomer().getEmail())))
                 );
-
     }
+
     @Test
     @DisplayName("Add a new find for purchases by id of book in the Bookshop")
     public void findPurchaseByBookIdTest() {
