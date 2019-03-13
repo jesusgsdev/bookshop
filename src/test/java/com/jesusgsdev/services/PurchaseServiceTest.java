@@ -41,13 +41,8 @@ public class PurchaseServiceTest {
         Customer customer = new Customer("pedro", "pajares", "avenida palmera45", email);
         Customer customer2 = new Customer("pedr2o", "pajares2", "avenida palmera452", email);
         Customer customer3 = new Customer("pedr2o3", "pajares3", "avenida palmera453", email);
-
         Book book = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider");
-
-
         PaymentMethod paymentMethod = PaymentMethod.fromValue("paypal").get();
-
-
         Purchase purchase = new Purchase(customer,1.20,book, paymentMethod,"Euros");
         Purchase purchase2 = new Purchase(customer2,1.20,book, paymentMethod,"Euros");
         Purchase purchase3 = new Purchase(customer3,1.20,book, paymentMethod,"Euros");
@@ -74,7 +69,6 @@ public class PurchaseServiceTest {
         book1.setId(id);
 
         Customer customer = new Customer("pedro", "pajares", "avenida palmera45", "johndoe@mailinator.com");
-
         Optional<PaymentMethod> paymentMethodOptional = PaymentMethod.fromValue("paypal");
         PaymentMethod paymentMethod = paymentMethodOptional.get();
         Purchase purchase = new Purchase(customer,1.20,book1, paymentMethod,"Euros");
@@ -84,12 +78,11 @@ public class PurchaseServiceTest {
         //When
         List<Purchase> purchaseFound = purchaseRepository.findPurchaseByBookId((String.valueOf(id)));
 
-        //then
+        //Then
         assertAll("Purchases for this book found",
                 () -> assertThat(purchaseFound, not(IsEmptyCollection.empty())),
                 () -> assertThat(purchaseFound, hasSize(1)),
                 () -> assertTrue(purchaseFound.stream().allMatch(custom -> custom.getBook().getId().equals((id))))
                         );
-
     }
 }
