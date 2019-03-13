@@ -39,7 +39,7 @@ public class BookServiceTests {
     @DisplayName("Add a new book in the Bookshop")
     public void saveTest(){
         //Given
-        Book book = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider");
+        Book book = Book.builder().isbn("ISBN00001").title("Book Name").price(9.99).author("Author Name").pages(200).provider("provider").build();
         book.setId(1L);
         given(bookRepository.save(any(Book.class))).willReturn(book);
 
@@ -57,8 +57,8 @@ public class BookServiceTests {
     public void findBooksByAuthor(){
         //Given
         final String author = UUID.randomUUID().toString().substring(0,10);
-        Book book1 = new Book("ISBN00001", "Book Name", 9.99, author, 200, "provider");
-        Book book2 = new Book("ISBN00003", "Book Name 3", 9.99, author, 200, "provider");
+        Book book1 = Book.builder().isbn("ISBN00001").title("Book Name").price(9.99).author(author).pages(200).provider("provider").build();
+        Book book2 = Book.builder().isbn("ISBN00003").title("Book Name 3").price(9.99).author(author).pages(200).provider("provider").build();
         given(bookRepository.findBookByAuthor(author)).willReturn(Lists.newArrayList(book1, book2));
 
         //When
@@ -77,7 +77,6 @@ public class BookServiceTests {
     public void findBooksByAuthorWhenThereAreNoBooks(){
         //Given
         final String author = UUID.randomUUID().toString().substring(0,10);
-        Book book1 = new Book("ISBN00001", "Book Name", 9.99, "Author Name", 200, "provider");
         given(bookRepository.findBookByAuthor(author)).willReturn(Lists.emptyList());
 
         //When
@@ -94,7 +93,7 @@ public class BookServiceTests {
     public void findBooksByISBN(){
         //Given
         final String isbn = "ISBN00001";
-        Book book1 = new Book(isbn, "Book Name", 9.99, "Author Name", 200, "provider");
+        Book book1 = Book.builder().isbn(isbn).title("Book Name").price(9.99).author("Author Name").pages(200).provider("provider").build();
         given(bookRepository.findBookByIsbn(isbn)).willReturn(Optional.of(book1));
 
         //When
@@ -111,8 +110,8 @@ public class BookServiceTests {
     @DisplayName("Find all books")
     public void findAllBooks(){
         //Given
-        Book book1 = new Book("ISBN00001", "Book Name", 9.99, "Author Name", 200, "provider");
-        Book book2 = new Book("ISBN00003", "Book Name 3", 9.99, "Author Name", 200, "provider");
+        Book book1 = Book.builder().isbn("ISBN00001").title("Book Name").price(9.99).author("Author Name").pages(200).provider("provider").build();
+        Book book2 = Book.builder().isbn("ISBN00003").title("Book Name 3").price(9.99).author("Author Name").pages(200).provider("provider").build();
         given(bookRepository.findAll()).willReturn(Lists.newArrayList(book1, book2));
 
         //When

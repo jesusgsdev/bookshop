@@ -27,7 +27,16 @@ public class BookFacade {
             bookDTO.setError(BOOK_ALREADY_EXISTS.getCode());
             return bookDTO;
         } else {
-            Book book = new Book(bookDTO.getISBN(), bookDTO.getTitle(), bookDTO.getPrice(), bookDTO.getAuthor(), bookDTO.getPages(), bookDTO.getProvider());
+            Book book = Book
+                    .builder()
+                        .isbn(bookDTO.getISBN())
+                        .title(bookDTO.getTitle())
+                        .price(bookDTO.getPrice())
+                        .author(bookDTO.getAuthor())
+                        .pages(bookDTO.getPages())
+                        .provider(bookDTO.getProvider())
+                    .build();
+
             book = bookService.save(book);
             bookDTO.setId(book.getId());
         }
