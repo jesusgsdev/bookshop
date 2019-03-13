@@ -39,7 +39,6 @@ public class CustomerServiceTest {
         assertEquals(new Long(1), customer.getId());
     }
 
-
     @Test
     @DisplayName("Add a new find for email customer in the Bookshop")
     public void findCustomerByEmailTest() {
