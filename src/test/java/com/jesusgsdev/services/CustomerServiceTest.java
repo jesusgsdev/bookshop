@@ -57,6 +57,4 @@ public class CustomerServiceTest {
                 () -> assertEquals(((Customer)customerFound.get()).getEmail(), email)
                 );
     }
-
-
 }
