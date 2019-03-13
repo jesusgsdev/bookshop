@@ -58,7 +58,14 @@ public class PurchaseFacade {
         Book book = bookOptional.get();
         PaymentMethod paymentMethod = paymentMethodOptional.get();
 
-        Purchase purchase = new Purchase(customer, book.getPrice(), book, paymentMethod, GBP.toString());
+        Purchase purchase = Purchase
+                .builder()
+                    .customer(customer)
+                    .price(book.getPrice())
+                    .book(book)
+                    .paymentMethod(paymentMethod)
+                    .currency(GBP.toString())
+                .build();
         purchaseService.save(purchase);
 
         purchaseResponseDTO = PurchaseResponseDTO.fromPurchase(purchase);

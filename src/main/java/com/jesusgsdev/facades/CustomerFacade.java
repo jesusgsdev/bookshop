@@ -23,7 +23,13 @@ public class CustomerFacade {
             customerDTO.setErrorMessage(CUSTOMER_ALREADY_EXISTS.getMessage());
             customerDTO.setError(CUSTOMER_ALREADY_EXISTS.getCode());
         } else {
-            Customer customer = new Customer(customerDTO.getName(), customerDTO.getSurname(), customerDTO.getAddress(), customerDTO.getEmail());
+            Customer customer = Customer
+                    .builder()
+                        .name(customerDTO.getName())
+                        .surname(customerDTO.getSurname())
+                        .address(customerDTO.getAddress())
+                        .email(customerDTO.getEmail())
+                    .build();
             customerService.save(customer);
             customerDTO.setId(customer.getId());
         }

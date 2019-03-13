@@ -30,8 +30,14 @@ public class CustomerServiceTest {
     @DisplayName("Add a new customer in the Bookshop")
     public void saveTest() {
         //Given
-        Customer customer = new Customer("pedro", "pajares", "killopedro", "johndoe@mailinator.com");
-        customer.setId(1L);
+        Customer customer = Customer
+                .builder()
+                    .name("pedro")
+                    .surname("pajares")
+                    .address("avenida palmera45")
+                    .email("johndoe@mailinator.com")
+                    .id(1L)
+                .build();
         given(customerRepository.save(ArgumentMatchers.any(Customer.class))).willReturn(customer);
 
         //When
@@ -47,7 +53,14 @@ public class CustomerServiceTest {
     public void findCustomerByEmailTest() {
         //Given
         String email = "johndoe@mailinator.com";
-        Customer customer = new Customer("pedro", "torres", "avenida palmera45", email);
+        Customer customer = Customer
+                .builder()
+                .name("pedro")
+                .surname("pajares")
+                .address("avenida palmera45")
+                .email(email)
+                .id(1L)
+                .build();
         given(customerRepository.findCustomerByEmail(email)).willReturn(Optional.of(customer));
 
         //When

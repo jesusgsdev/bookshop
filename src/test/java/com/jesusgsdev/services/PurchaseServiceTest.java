@@ -1,5 +1,6 @@
 package com.jesusgsdev.services;
 
+import com.jesusgsdev.constants.Currency;
 import com.jesusgsdev.entities.Book;
 import com.jesusgsdev.entities.Customer;
 import com.jesusgsdev.entities.Purchase;
@@ -39,14 +40,64 @@ public class PurchaseServiceTest {
     public void findPurchasesByCustomerEmailTest() {
         //Given
         String email = "johndoe@mailinator.com";
-        Customer customer = new Customer("pedro", "pajares", "avenida palmera45", email);
-        Customer customer2 = new Customer("pedr2o", "pajares2", "avenida palmera452", email);
-        Customer customer3 = new Customer("pedr2o3", "pajares3", "avenida palmera453", email);
-        Book book = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider");
-        PaymentMethod paymentMethod = PaymentMethod.fromValue("paypal").get();
-        Purchase purchase = new Purchase(customer,1.20,book, paymentMethod,"Euros");
-        Purchase purchase2 = new Purchase(customer2,1.20,book, paymentMethod,"Euros");
-        Purchase purchase3 = new Purchase(customer3,1.20,book, paymentMethod,"Euros");
+        Customer customer = Customer
+                .builder()
+                    .name("pedro")
+                    .surname("pajares")
+                    .address("avenida palmera45")
+                    .email("johndoe@mailinator.com")
+                    .id(1L)
+                .build();
+        Customer customer2 = Customer
+                .builder()
+                    .name("pedro2")
+                    .surname("pajares2")
+                    .address("avenida palmera42")
+                    .email("johndoe@mailinator.com")
+                    .id(1L)
+                .build();
+        Customer customer3 = Customer
+                .builder()
+                    .name("pedro3")
+                    .surname("pajares3")
+                    .address("avenida palmera453")
+                    .email("johndoe@mailinator.com")
+                    .id(1L)
+                .build();
+        Book book = Book
+                .builder()
+                    .isbn("ISBN00001")
+                    .title("Book Name")
+                    .price(9.99)
+                    .author("Author Name")
+                    .pages(200)
+                    .provider("provider")
+                .build();
+
+        Purchase purchase = Purchase
+                .builder()
+                    .customer(customer)
+                    .price(1.20)
+                    .book(book)
+                    .paymentMethod(PaymentMethod.PAYPAL)
+                    .currency(Currency.EUR.name())
+                .build();
+        Purchase purchase2 = Purchase
+                .builder()
+                    .customer(customer2)
+                    .price(1.20)
+                    .book(book)
+                    .paymentMethod(PaymentMethod.PAYPAL)
+                    .currency(Currency.EUR.name())
+                    .build();
+        Purchase purchase3 = Purchase
+                .builder()
+                    .customer(customer3)
+                    .price(1.20)
+                    .book(book)
+                    .paymentMethod(PaymentMethod.PAYPAL)
+                    .currency(Currency.EUR.name())
+                .build();
 
         given(purchaseRepository.findPurchaseByCustomerEmail(email)).willReturn(Lists.newArrayList(purchase,purchase2,purchase3));
 
@@ -66,12 +117,34 @@ public class PurchaseServiceTest {
     public void findPurchaseByBookIdTest() {
         //Given
         Long id = 1L;
-        Book book1 = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider");
-        book1.setId(id);
+        Book book1 = Book
+                .builder()
+                .isbn("ISBN00001")
+                .title("Book Name")
+                .price(9.99)
+                .author("Author Name")
+                .pages(200)
+                .provider("provider")
+                .id(id)
+                .build();
 
-        Customer customer = new Customer("pedro", "pajares", "avenida palmera45", "johndoe@mailinator.com");
-        PaymentMethod paymentMethod = PaymentMethod.fromValue("paypal").get();
-        Purchase purchase = new Purchase(customer,1.20,book1, paymentMethod,"Euros");
+        Customer customer = Customer
+                .builder()
+                    .name("pedro")
+                    .surname("pajares")
+                    .address("avenida palmera45")
+                    .email("johndoe@mailinator.com")
+                    .id(1L)
+                .build();
+
+        Purchase purchase = Purchase
+                .builder()
+                    .customer(customer)
+                    .price(1.20)
+                    .book(book1)
+                    .paymentMethod(PaymentMethod.PAYPAL)
+                    .currency(Currency.EUR.name())
+                .build();
 
         given(purchaseRepository.findPurchaseByBookId(id.toString())).willReturn(Lists.newArrayList(purchase));
 
