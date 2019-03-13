@@ -23,19 +23,22 @@ import static org.mockito.BDDMockito.given;
 
 public class PurchaseServiceTest {
 
-    @InjectMocks private PurchaseService purchaseService;
+    @InjectMocks
+    private PurchaseService purchaseService;
 
-    @Mock private PurchaseRepository purchaseRepository;
+    @Mock
+    private PurchaseRepository purchaseRepository;
 
-    @BeforeEach public void setUp() {
+    @BeforeEach
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     @DisplayName("Add a new find of purchases for customers by email in the Bookshop")
     public void findPurchasesByCustomerEmailTest() {
-        String email = "johndoe@mailinator.com";
         //Given
+        String email = "johndoe@mailinator.com";
         Customer customer = new Customer("pedro", "pajares", "avenida palmera45", email);
         Customer customer2 = new Customer("pedr2o", "pajares2", "avenida palmera452", email);
         Customer customer3 = new Customer("pedr2o3", "pajares3", "avenida palmera453", email);

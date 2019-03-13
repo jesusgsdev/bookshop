@@ -15,11 +15,14 @@ import static org.mockito.BDDMockito.given;
 
 public class CustomerServiceTest {
 
-    @InjectMocks private CustomerService customerService;
+    @InjectMocks
+    private CustomerService customerService;
 
-    @Mock private CustomerRepository customerRepository;
+    @Mock
+    private CustomerRepository customerRepository;
 
-    @BeforeEach public void setUp() {
+    @BeforeEach
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
