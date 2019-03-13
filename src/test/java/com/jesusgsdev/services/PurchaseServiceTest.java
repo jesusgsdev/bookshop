@@ -1,7 +1,5 @@
 package com.jesusgsdev.services;
 
-
-import com.fasterxml.jackson.datatype.jdk8.OptionalSerializer;
 import com.jesusgsdev.entities.Book;
 import com.jesusgsdev.entities.Customer;
 import com.jesusgsdev.entities.Purchase;
@@ -15,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -28,14 +24,11 @@ import static org.mockito.BDDMockito.given;
 
 public class PurchaseServiceTest {
 
-    @InjectMocks
-    private PurchaseService purchaseService;
+    @InjectMocks private PurchaseService purchaseService;
 
-    @Mock
-    private PurchaseRepository purchaseRepository;
+    @Mock private PurchaseRepository purchaseRepository;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeEach public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
@@ -51,21 +44,20 @@ public class PurchaseServiceTest {
 
         Book book = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider");
 
-        Optional<PaymentMethod> paymentMethodOptional = PaymentMethod.fromValue("paypal");
-        PaymentMethod paymentMethod = paymentMethodOptional.get();
 
-        Purchase purchase= new Purchase(customer,1.20,book, paymentMethod,"Euros");
-        Purchase purchase2= new Purchase(customer2,1.20,book, paymentMethod,"Euros");
-        Purchase purchase3= new Purchase(customer3,1.20,book, paymentMethod,"Euros");
+        PaymentMethod paymentMethod = PaymentMethod.fromValue("paypal").get();
 
 
-
+        Purchase purchase = new Purchase(customer,1.20,book, paymentMethod,"Euros");
+        Purchase purchase2 = new Purchase(customer2,1.20,book, paymentMethod,"Euros");
+        Purchase purchase3 = new Purchase(customer3,1.20,book, paymentMethod,"Euros");
 
         given(purchaseRepository.findPurchaseByCustomerEmail(email)).willReturn(Lists.newArrayList(purchase,purchase2,purchase3));
-        //when
-        List<Purchase> listPurchase=purchaseService.findPurchasesByCustomerEmail(email);
 
-        //then
+        //when
+        List<Purchase> listPurchase = purchaseService.findPurchasesByCustomerEmail(email);
+
+        //Then
         assertAll( "customers than  purchase books found",
                 () -> assertThat(listPurchase, not(IsEmptyCollection.empty())),
                 () -> assertThat(listPurchase, hasSize(3)),
@@ -77,7 +69,7 @@ public class PurchaseServiceTest {
     @DisplayName("Add a new find for purchases by id of book in the Bookshop")
     public void findPurchaseByBookIdTest() {
         //Given
-        Long id=1L;
+        Long id = 1L;
         Book book1 = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider");
         book1.setId(id);
 
@@ -85,7 +77,7 @@ public class PurchaseServiceTest {
 
         Optional<PaymentMethod> paymentMethodOptional = PaymentMethod.fromValue("paypal");
         PaymentMethod paymentMethod = paymentMethodOptional.get();
-        Purchase purchase= new Purchase(customer,1.20,book1, paymentMethod,"Euros");
+        Purchase purchase = new Purchase(customer,1.20,book1, paymentMethod,"Euros");
 
         given(purchaseRepository.findPurchaseByBookId(id.toString())).willReturn(Lists.newArrayList(purchase));
 
