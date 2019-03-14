@@ -64,6 +64,9 @@ public class BookFacade {
     }
 
     public List<BookDTO> findAll(){
-        return bookService.findAll().stream().map(BookDTO::fromBook).collect(Collectors.toList());
+        return bookService.findAll()
+                .stream()
+                .map(BookDTO::fromBook)
+                .collect(Collectors.toList());
     }
 }
