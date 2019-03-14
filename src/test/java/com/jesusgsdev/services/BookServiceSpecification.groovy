@@ -23,9 +23,8 @@ class BookServiceSpecification extends Specification {
     }
 
     def "Book is correctly saved"(){
-
         given: "A Book with ISBN, Title, Price, Author, Pages and Provider"
-            Book book = new Book("ISBN00001", "Book Name", 9.99, "Author Name Test", 200, "provider")
+            Book book = Book.builder().isbn("ISBN00001").title("Book Name").price(9.99).author("Author Name Test").price(200).provider("provider").build();
         and: "Mocking the repository to return the book after performing a save"
             bookRepository.save(book) >> book
 
