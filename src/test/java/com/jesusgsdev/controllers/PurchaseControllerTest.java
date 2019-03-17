@@ -91,12 +91,9 @@ public class PurchaseControllerTest {
         booksIterator.add(purchaseRequestDto3);
 
 
-        //List<PurchaseResponseDTO> constructBookDTO = BookDTO.fromBook(booksIterator.stream().allMatch());
 
 
         //Then
-      //  List<PurchaseRequestDTO> returnPurchaseRequestDtoExpected =  Lists.list(purchaseRequestDtoExpected);
-      //  List<List<PurchaseResponseDTO>> listaValidator =  Lists.list(expectedPurchaseResponseDTO);
 
         assertAll( "Purchases found",
                 () -> assertThat(expectedPurchaseResponseDTO, not(IsEmptyCollection.empty())),
