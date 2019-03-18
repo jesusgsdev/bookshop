@@ -38,7 +38,7 @@ public class BookFacade {
                     .build();
 
             book = bookService.save(book);
-            bookDTO.setId(book.getId());
+
         }
         return bookDTO;
     }
@@ -57,6 +57,13 @@ public class BookFacade {
 
     public List<BookDTO> findBooksByAuthor(String author){
         List<Book> books = bookService.findBooksByAuthor(author);
+        if(!books.isEmpty()) {
+            return books.stream().map(BookDTO::fromBook).collect(Collectors.toList());
+        }
+        return new ArrayList<>(0);
+    }
+    public List<BookDTO> findBooksByNameSearch(String str){
+        List<Book> books = bookService.findBooksByNameSearch(str);
         if(!books.isEmpty()) {
             return books.stream().map(BookDTO::fromBook).collect(Collectors.toList());
         }
