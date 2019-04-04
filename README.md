@@ -8,7 +8,7 @@
 In this demo project I will be using Spring Boot 2.1 and jUnit 5 in their latest releases.
 
 ## Accessing to the H2 database
-You can access to the database typing `http://localhost:8080/console` and using as JDBC URL this one: `jdbc:h2:mem:bookshop`
+You can access to the database typing `http://localhost:2289/console` and using as JDBC URL this one: `jdbc:h2:mem:bookshop`
 and the user name is `sa` and the password is `password`.
 
 ## Postman Collection
@@ -29,8 +29,8 @@ To leave the Swarm and stop and delete all created containers run the command
 `docker swarm leave` or `docker swarm leave --force` in case the first doesn't work.
 
 ### Current stack
-- SpringBoot 2.1.2 RELEASE
-- JUnit 5.3.1
-- Mockito 2.18.3
-- H2 Database 1.4.196
-- Gradle 5.1.1
+- SpringBoot 2.1.4 RELEASE
+- JUnit 5.4.1
+- Mockito 2.25.1
+- H2 Database 1.4.199
+- Gradle 5.3.1
