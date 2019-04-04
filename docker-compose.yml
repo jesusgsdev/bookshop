@@ -4,7 +4,7 @@ services:
   bookshop:
    image: bookshop
    ports:
-     - 8080
+     - 2289
    environment:
      - SERVICE_PORTS=8080
    deploy:
@@ -28,7 +28,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - "8080:80"
+      - "2289:80"
     networks:
       - app
     deploy:

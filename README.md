@@ -15,10 +15,10 @@ and the user name is `sa` and the password is `password`.
 I have provided a Postman collection with all the existing endpoints and examples of calls for each one of them.
 
 ## Docker
-### Running the Bookshop app as a single instance within a container on port 8080
+### Running the Bookshop app as a single instance within a container on port 2289
 If you want to build an image for docker, just execute the command 
 `docker build -t dockerbookshop .` to build the image and then use
-`docker run -p 8080:8080 docker-bookshop` to run it within a docker container.
+`docker run -p 2289:2289 docker-bookshop` to run it within a docker container.
 
 ### Running 10 instances behind a load balancer on port 80
 First of all, you need to run the command `docker swarm init` to create a Swarm within docker
