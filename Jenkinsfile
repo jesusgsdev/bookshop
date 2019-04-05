@@ -12,4 +12,7 @@ node {
         sh './gradlew clean build'
     }
 
+    stage('Dependency Security Check by OWASP') {
+        sh './gradlew dependencyCheckAnalyze'
+    }
 }
