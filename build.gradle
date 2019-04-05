@@ -1,13 +1,17 @@
 buildscript{
     repositories {
         mavenCentral()
-        mavenLocal()
-        maven {
-            url = 'http://repo.maven.apache.org/maven2'
-        }
     }
     dependencies {
         classpath 'org.owasp:dependency-check-gradle:5.0.0-M2'
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url = 'http://repo.maven.apache.org/maven2'
     }
 }
 
