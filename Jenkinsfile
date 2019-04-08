@@ -9,10 +9,11 @@ node {
     }
 
     stage('Unit Tests') {
-        sh './gradlew clean build'
+        sh './gradlew cleanTest test'
     }
 
     stage('Dependency Security Check by OWASP') {
         sh './gradlew dependencyCheckAnalyze'
     }
+
 }
