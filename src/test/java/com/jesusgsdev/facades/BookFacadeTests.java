@@ -18,11 +18,14 @@ import static org.mockito.BDDMockito.given;
 
 public class BookFacadeTests {
 
-    @InjectMocks private BookFacade bookFacade;
+    @InjectMocks
+    private BookFacade bookFacade;
 
-    @Mock private BookService bookService;
+    @Mock
+    private BookService bookService;
 
-    @BeforeEach public void setUp() {
+    @BeforeEach
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 

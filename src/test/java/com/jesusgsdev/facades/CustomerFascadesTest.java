@@ -22,11 +22,14 @@ import static org.mockito.BDDMockito.given;
 public class CustomerFascadesTest {
 
 
-    @InjectMocks private CustomerFacade customerFacade;
+    @InjectMocks
+    private CustomerFacade customerFacade;
 
-    @Mock private CustomerService customerService;
+    @Mock
+    private CustomerService customerService;
 
-    @BeforeEach public void setUp() {
+    @BeforeEach
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
@@ -41,7 +44,6 @@ public class CustomerFascadesTest {
                 .email(email).id(1L).build();
 
 
-     //   Optional<Customer> customerByEmailExpected = customerService.findCustomerByEmail(email);
         Optional<Customer> customerByEmailExpected = Optional.of(customer);
 
         given(customerService.findCustomerByEmail(email)).willReturn(customerByEmailExpected);
@@ -64,9 +66,8 @@ public class CustomerFascadesTest {
         Customer customer = Customer
                 .builder().name("pedro").surname("pajares").address("avenida palmera45")
                 .email(email).id(1L).build();
-        // Optional<Customer> expectedCustomer = customerService.findCustomerByEmail(email);
         Optional<Customer> expectedCustomer = Optional.of(customer);
-       given(customerService.findCustomerByEmail(email)).willReturn(expectedCustomer);
+        given(customerService.findCustomerByEmail(email)).willReturn(expectedCustomer);
 
         //When
          CustomerDTO expectedDTO = customerFacade.findCustomerByEmail(email);

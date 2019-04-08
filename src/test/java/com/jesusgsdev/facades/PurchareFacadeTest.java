@@ -1,7 +1,6 @@
 package com.jesusgsdev.facades;
 
 
-import com.jesusgsdev.controllers.PurchaseController;
 import com.jesusgsdev.dtos.PurchaseRequestDTO;
 import com.jesusgsdev.dtos.PurchaseResponseDTO;
 import com.jesusgsdev.entities.Book;
@@ -20,10 +19,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.jesusgsdev.constants.Currency.GBP;
 import static org.hamcrest.CoreMatchers.not;
@@ -31,17 +28,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willReturn;
 
 public class PurchareFacadeTest {
 
-    @InjectMocks private PurchaseFacade purchaseFacade;
+    @InjectMocks
+    private PurchaseFacade purchaseFacade;
 
-    @Mock     private PurchaseService purchaseService;
+    @Mock
+    private PurchaseService purchaseService;
 
-    @Mock    private BookService bookService;
+    @Mock
+    private BookService bookService;
 
-    @Mock  private CustomerService customerService;
+    @Mock
+    private CustomerService customerService;
 
 
     @BeforeEach  public void setUp() {
@@ -108,8 +108,7 @@ public class PurchareFacadeTest {
                     .builder().customer(customer).price(book.getPrice()).book(book)
                     .paymentMethod(PaymentMethod.PAYPAL).currency(GBP.toString()).build();
 
-              // List<Purchase> listaPurchaseResponseDTO = purchaseService.findPurchasesByCustomerEmail(email);
-                 List<Purchase> listaPurchaseResult =  Lists.list(purchase,purchase2,purchase3);
+            List<Purchase> listaPurchaseResult =  Lists.list(purchase, purchase2, purchase3);
 
 
            given(purchaseService.findPurchasesByCustomerEmail(email)).willReturn(listaPurchaseResult);

@@ -26,14 +26,16 @@ import static org.mockito.BDDMockito.given;
 
 public class PurchaseControllerTest {
 
-    @InjectMocks private PurchaseController purchaseController;
+    @InjectMocks
+    private PurchaseController purchaseController;
 
-    @Mock PurchaseFacade purchaseFacade;
+    @Mock
+    private PurchaseFacade purchaseFacade;
 
-    @BeforeEach    public void setUp() {
+    @BeforeEach
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
-
 
     @Test
     @DisplayName("Add purchase in Bookshop controllers")
@@ -41,13 +43,12 @@ public class PurchaseControllerTest {
         //Given
         String email="johndoe@mailinator.com";
         Book book = Book.builder().isbn("ISBN00001").title("Book Name").price(9.99).author("Manuel").pages(200).provider("provider").build();
-       // BookDTO bookDTO1 = BookDTO.fromBook(book);
 
         Customer customer = Customer.builder().name("pedro").surname("pajares")
                 .address("avenida palmera45").email(email)
                 .id(1L).build();
-      PurchaseRequestDTO purchaseRequestDto  = new PurchaseRequestDTO(customer.getEmail(),book.getIsbn(),PaymentMethod.PAYPAL.toString()); // creating the request
-         PurchaseResponseDTO returnResult = purchaseFacade.performPurchase(purchaseRequestDto);
+        PurchaseRequestDTO purchaseRequestDto  = new PurchaseRequestDTO(customer.getEmail(),book.getIsbn(),PaymentMethod.PAYPAL.toString()); // creating the request
+        PurchaseResponseDTO returnResult = purchaseFacade.performPurchase(purchaseRequestDto);
 
         given(purchaseFacade.performPurchase(purchaseRequestDto)).willReturn(returnResult);
 
@@ -73,28 +74,25 @@ public class PurchaseControllerTest {
         Customer customer3 = Customer.builder().name("pedro").surname("pajares")
                 .address("avenida palmera45").email(email)
                 .id(1L).build();
+
         PurchaseRequestDTO purchaseRequestDto  = new PurchaseRequestDTO(customer.getEmail(),book.getIsbn(),PaymentMethod.PAYPAL.toString());
         PurchaseRequestDTO purchaseRequestDto2  = new PurchaseRequestDTO(customer2.getEmail(),book.getIsbn(),PaymentMethod.PAYPAL.toString());
         PurchaseRequestDTO purchaseRequestDto3  = new PurchaseRequestDTO(customer3.getEmail(),book.getIsbn(),PaymentMethod.PAYPAL.toString());
 
-
-       List<PurchaseResponseDTO> purchaseRequestDtoExpected =  Lists.list(purchaseController.addPurchase(purchaseRequestDto),purchaseController.addPurchase(purchaseRequestDto2),purchaseController.addPurchase(purchaseRequestDto3));
+        List<PurchaseResponseDTO> purchaseRequestDtoExpected =  Lists.list(purchaseController.addPurchase(purchaseRequestDto),purchaseController.addPurchase(purchaseRequestDto2),purchaseController.addPurchase(purchaseRequestDto3));
 
         given(purchaseFacade.findPurchasesByCustomerEmail(email)).willReturn(purchaseRequestDtoExpected);
+
         //When
         List<PurchaseResponseDTO> expectedPurchaseResponseDTO = purchaseController.findPurchasesByCustomerEmail(email);
 
         //Validation List
-        List<PurchaseRequestDTO> booksIterator = new ArrayList<PurchaseRequestDTO>();
+        List<PurchaseRequestDTO> booksIterator = new ArrayList<>();
         booksIterator.add(purchaseRequestDto);
         booksIterator.add(purchaseRequestDto2);
         booksIterator.add(purchaseRequestDto3);
 
-
-
-
         //Then
-
         assertAll( "Purchases found",
                 () -> assertThat(expectedPurchaseResponseDTO, not(IsEmptyCollection.empty())),
                 () -> assertThat(expectedPurchaseResponseDTO, hasSize(3)),

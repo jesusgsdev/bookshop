@@ -1,9 +1,7 @@
 package com.jesusgsdev.controllers;
 
-import com.jesusgsdev.dtos.BookDTO;
 import com.jesusgsdev.dtos.CustomerDTO;
 import com.jesusgsdev.entities.Customer;
-import com.jesusgsdev.facades.BookFacade;
 import com.jesusgsdev.facades.CustomerFacade;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,22 +10,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
 public class CustomerControllerTest {
 
+    @InjectMocks
+    private CustomerController customerController;
 
-
-    @InjectMocks private CustomerController customerController;
-
-    @Mock  private CustomerFacade customerFacade;
+    @Mock
+    private CustomerFacade customerFacade;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
-
 
     @Test
     @DisplayName("Add customers in Bookshop controllers")
@@ -50,7 +47,6 @@ public class CustomerControllerTest {
 
         //Then
        // assertEquals(expectedCustomerDTO , customerDTO1);
-
     }
 
 
@@ -64,7 +60,7 @@ public class CustomerControllerTest {
         CustomerDTO customerDTO1 =  CustomerDTO.fromCustomer(customer);
 
         //Given
-       given(customerFacade.findCustomerByEmail(email)).willReturn(customerDTO1);
+        given(customerFacade.findCustomerByEmail(email)).willReturn(customerDTO1);
 
         //When
         CustomerDTO expectedCustomerDTO= customerController.findCustomerByEmail(email);
