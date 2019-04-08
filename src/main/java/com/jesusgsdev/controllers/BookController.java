@@ -13,8 +13,6 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
 
-
-
     @Autowired
     private BookFacade bookFacade;
 
@@ -38,10 +36,11 @@ public class BookController {
     public List<BookDTO> getBooksByAuthor(@RequestParam("author") String author) {
         return bookFacade.findBooksByAuthor(author);
     }
+
     @GetMapping(params = "title")
-       /*  Book book = Book.builder().isbn("ISBN00001").title("El niño del pijama").price(9.99).author("Author Name").pages(200).provider("provider").build();
-        bookFacade.addBook(BookDTO.fromBook(book));*/
-    public List<BookDTO> getBooksByAuthorSearch(@RequestParam("title") String title) {
+    public List<BookDTO> getBooksByTitle(@RequestParam("title") String title) {
         return bookFacade.findBooksByNameSearch(title);
     }
+    /*  Book book = Book.builder().isbn("ISBN00001").title("El niño del pijama").price(9.99).author("Author Name").pages(200).provider("provider").build();
+        bookFacade.addBook(BookDTO.fromBook(book));*/
 }

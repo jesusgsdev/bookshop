@@ -14,8 +14,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
     List<Book> findAll();
 
-    @Query(value = "SELECT u FROM Book u where title like CONCAT('%', ?1 ,'%') ")
-    List<Book> findAllByNameSearch(String str);
+    List<Book> findBooksByTitleContaining(String title);
 
     List<Book> findBookByAuthor(String author);
 

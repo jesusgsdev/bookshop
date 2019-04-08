@@ -38,7 +38,7 @@ public class BookFacade {
                     .build();
 
             book = bookService.save(book);
-
+            bookDTO.setId(book.getId());
         }
         return bookDTO;
     }
@@ -63,7 +63,7 @@ public class BookFacade {
         return new ArrayList<>(0);
     }
     public List<BookDTO> findBooksByNameSearch(String str){
-        List<Book> books = bookService.findBooksByNameSearch(str);
+        List<Book> books = bookService.findBooksByTitle(str);
         if(!books.isEmpty()) {
             return books.stream().map(BookDTO::fromBook).collect(Collectors.toList());
         }
