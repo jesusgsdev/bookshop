@@ -3,6 +3,5 @@ language: java
 jdk:
  - oraclejdk11
 
-env:
- global:
-  - CODECOV_TOKEN=60fad1e7-617c-4530-ab88-4b79b5fb5c46
+after_success:
+ - codecov
