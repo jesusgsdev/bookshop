@@ -30,7 +30,7 @@ To leave the Swarm and stop and delete all created containers run the command
 
 ### Current stack
 - SpringBoot 2.1.4 RELEASE
-- JUnit 5.4.1
+- JUnit 5.4.2
 - Mockito 2.25.1
 - H2 Database 1.4.199
 - Gradle 5.3.1
