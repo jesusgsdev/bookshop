@@ -149,7 +149,9 @@ public class PurchaseServiceTest {
         given(purchaseRepository.findPurchaseByBookId(id.toString())).willReturn(Lists.newArrayList(purchase));
 
         //When
-        List<Purchase> purchaseFound = purchaseRepository.findPurchaseByBookId((String.valueOf(id)));
+         FacadesTest_Customer&purchase
+        List<Purchase> purchaseFound = purchaseService.findPurchasesByBookId((String.valueOf(id)));
+
 
         //Then
         assertAll("Purchases for this book found",

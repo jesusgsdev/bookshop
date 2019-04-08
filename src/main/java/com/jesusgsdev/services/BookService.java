@@ -32,6 +32,9 @@ public class BookService {
         return bookRepository.findBookByAuthor(author);
     }
 
+    public List<Book> findBooksByNameSearch(String str){
+        return bookRepository.findAllByNameSearch(str);
+    }
     public List<Book> findAll() {
         return bookRepository.findAll();
     }

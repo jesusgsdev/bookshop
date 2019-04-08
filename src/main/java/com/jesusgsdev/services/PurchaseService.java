@@ -12,7 +12,7 @@ import java.util.List;
 public class PurchaseService {
 
     @Autowired
-    PurchaseRepository purchaseRepository;
+    private PurchaseRepository purchaseRepository;
 
     public Purchase save(Purchase purchase){
         return purchaseRepository.save(purchase);
